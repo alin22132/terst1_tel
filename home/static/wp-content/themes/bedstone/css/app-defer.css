@@ -1,0 +1,367 @@
+/**
+ * Where are all the colors?
+ *
+ * Everything has been moved to the bedstone/functions/palette.php file.
+ *
+ * In SASS, you can use the color names as css variables. There's even a
+ *     lighter/darker version of each color. Here are some examples:
+ *     color: var(--palette-text);
+ *     background-color: var(--palette-bg-alt);
+ *     border-color: var(--palette-bg-alt);
+ */
+.flexset, .footer-secondary__columns {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: -1vw;
+  margin-right: -1vw;
+  overflow: hidden;
+}
+.flexset > *, .footer-secondary__columns > * {
+  padding-left: calc(2vw / 2);
+  padding-right: calc(2vw / 2);
+}
+.flexset--nogutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+.flexset--nogutter > * {
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 781px) {
+  .flexset, .footer-secondary__columns {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -1.5vw;
+    margin-right: -1.5vw;
+    overflow: hidden;
+  }
+  .flexset > *, .footer-secondary__columns > * {
+    padding-left: calc(3vw / 2);
+    padding-right: calc(3vw / 2);
+  }
+  .flexset--nogutter {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flexset--nogutter > * {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (min-width: 991px) {
+  .flexset, .footer-secondary__columns {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -1em;
+    margin-right: -1em;
+    overflow: hidden;
+  }
+  .flexset > *, .footer-secondary__columns > * {
+    padding-left: calc(2em / 2);
+    padding-right: calc(2em / 2);
+  }
+  .flexset--nogutter {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flexset--nogutter > * {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (min-width: 1199px) {
+  .flexset, .footer-secondary__columns {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -1em;
+    margin-right: -1em;
+    overflow: hidden;
+  }
+  .flexset > *, .footer-secondary__columns > * {
+    padding-left: calc(2em / 2);
+    padding-right: calc(2em / 2);
+  }
+  .flexset--nogutter {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flexset--nogutter > * {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.visible-print,
+.visible-print-block,
+.visible-print-inline,
+.visible-print-inline-block {
+  display: none !important;
+}
+
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
+  }
+  @page {
+    margin: 0.5cm;
+  }
+  /* a, a:visited { text-decoration: underline; } */
+  .content a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  a[href^="javascript:"]:after, a[href^="#"]:after {
+    content: "";
+  }
+  pre, blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tr, img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2, h3 {
+    page-break-after: avoid;
+  }
+  .site-header .header-logo a:after {
+    content: "";
+  }
+  .hidden-print {
+    display: none !important;
+  }
+  table.visible-print {
+    display: table;
+  }
+  tr.visible-print {
+    display: table-row !important;
+  }
+  th.visible-print, td.visible-print {
+    display: table-cell !important;
+  }
+  .visible-print-block {
+    display: block !important;
+  }
+  .visible-print-inline {
+    display: inline !important;
+  }
+  .visible-print-inline-block {
+    display: inline-block !important;
+  }
+}
+.comments {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.comments .comment {
+  margin-top: 2.5rem;
+  border-bottom: 2px solid var(--wp--preset--color--palette-bg-alt);
+  padding-bottom: 1rem;
+}
+.comments .comment .comment {
+  padding-left: 2rem;
+}
+.comments .comment .comment:last-child {
+  border-bottom: 0 none;
+}
+.comments .comment-meta {
+  font-size: 0.8em;
+}
+.comments .reply {
+  font-size: 0.8em;
+}
+
+.megamenu > .container > .wp-block-columns {
+  margin-top: 0;
+  margin-left: 50px;
+  transform: translateX(50px);
+  padding: 1em 2em;
+  background-color: var(--wp--preset--color--palette-bg);
+  border-radius: 10px;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.3);
+}
+.megamenu .is-style-cta-link a {
+  color: var(--wp--preset--color--palette-brand-1);
+}
+
+.nav-pagination {
+  margin: 2rem 0;
+  font-size: 0.8em;
+}
+@media (min-width: 991px) {
+  .nav-pagination {
+    font-size: 0.9em;
+  }
+}
+.nav-pagination ul {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 480px) {
+  .nav-pagination ul {
+    justify-content: left;
+  }
+}
+.nav-pagination li {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.nav-pagination li a,
+.nav-pagination li span {
+  border: 1px solid var(--wp--preset--color--palette-text-alt);
+  border-left-width: 0;
+  padding: 0.3em 0.6em;
+}
+@media (min-width: 991px) {
+  .nav-pagination li a,
+  .nav-pagination li span {
+    padding: 0.4em 0.7em;
+  }
+}
+.nav-pagination li:first-child a, .nav-pagination li:first-child span {
+  border-left-width: 1px;
+  border-radius: 0.5em 0 0 0.5em;
+}
+.nav-pagination li:last-child a, .nav-pagination li:last-child span {
+  border-radius: 0 0.5em 0.5em 0;
+}
+.nav-pagination span {
+  cursor: default;
+}
+.nav-pagination a:hover,
+.nav-pagination a:focus {
+  background-color: var(--wp--preset--color--palette-bg-alt);
+}
+
+.footer-primary {
+  background-color: var(--wp--preset--color--palette-brand-2);
+  font-size: 0.95em;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  color: #fff;
+}
+.footer-primary a:hover,
+.footer-primary a:focus {
+  text-decoration: underline;
+}
+.footer-primary h1, .footer-primary h2, .footer-primary h3, .footer-primary h4, .footer-primary h5, .footer-primary h6, .footer-primary p, .footer-primary a, .footer-primary a:visited, .footer-primary ul, .footer-primary li {
+  color: #fff;
+}
+@media (min-width: 781px) {
+  .footer-primary {
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+  .footer-primary .container .wp-block-columns.is-layout-flex {
+    gap: 4em;
+  }
+}
+
+.footer-secondary {
+  background: var(--wp--preset--color--palette-brand-2);
+  color: #fff;
+}
+.footer-secondary p {
+  color: #fff;
+}
+
+.footer-secondary__columns {
+  border-top: 1px solid var(--wp--preset--color--palette-bg);
+}
+@media (min-width: 991px) {
+  .footer-secondary__columns {
+    align-items: center;
+  }
+}
+
+.footer-legal {
+  width: calc(100% * (1));
+  font-size: 0.8rem;
+  text-align: center;
+  color: #fff;
+}
+@media (min-width: 781px) {
+  .footer-legal {
+    width: calc(100% * (0.75));
+    text-align: left;
+  }
+}
+.footer-legal .copyright {
+  float: none;
+}
+@media (min-width: 781px) {
+  .footer-legal .copyright {
+    float: left;
+  }
+}
+
+.nav-legal__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-legal__list li {
+  display: inline-block;
+  margin: 0;
+}
+.nav-legal__list li::before {
+  content: "|";
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+  opacity: 0.4;
+}
+.nav-legal__list li:first-of-type::before {
+  content: none;
+  margin: 0;
+}
+@media (min-width: 781px) {
+  .nav-legal__list li:first-of-type::before {
+    content: "|";
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+  }
+}
+.nav-legal__list a,
+.nav-legal__list a:visited {
+  color: #fff;
+}
+.nav-legal__list a:hover,
+.nav-legal__list a:focus {
+  text-decoration: underline;
+}
+
+.footer-social {
+  width: calc(100% * (1));
+  padding-top: 0.5rem;
+  text-align: center;
+}
+@media (min-width: 781px) {
+  .footer-social {
+    width: calc(100% * (0.25));
+    padding-top: 0;
+    text-align: right;
+  }
+}
+
+/*# sourceMappingURL=app-defer.css.map */

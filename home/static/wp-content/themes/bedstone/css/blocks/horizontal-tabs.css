@@ -1,0 +1,133 @@
+.horizontal-tabs {
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.horizontal-tabs:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.horizontal-tabs input[type=radio] {
+  display: none;
+}
+
+.horizontal-tabs label {
+  display: inline-block;
+  cursor: pointer;
+  -webkit-transition: all 0.5s; /* Safari 3.1 to 6.0 */
+  transition: all 0.5s;
+  position: relative;
+  min-width: 100%;
+  margin-top: 15px;
+  padding: 10px 1rem;
+  background-color: var(--wp--preset--color--palette-bg);
+  border-radius: 30px;
+  box-shadow: 0 3px 8px rgba(76, 76, 76, 0.25);
+}
+@media (min-width: 768px) {
+  .horizontal-tabs label {
+    min-width: 0;
+    flex: 0 1 auto;
+    margin: 0 10px;
+  }
+}
+.horizontal-tabs label.has-image {
+  padding-left: 40px;
+}
+.horizontal-tabs label img {
+  display: block;
+  position: absolute;
+  top: 12px;
+  left: 15px;
+  height: 20px;
+}
+
+.horizontal-tabs label span {
+  display: none;
+  font-size: 1rem;
+}
+
+.horizontal-tabs label:hover {
+  box-shadow: 0 3px 8px var(--wp--preset--color--palette-brand-3);
+}
+
+.horizontal-tabs .tab__content {
+  display: none;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+}
+
+.horizontal-tabs .tab__content * {
+  -webkit-animation: scale 0.2s ease-in-out;
+  -moz-animation: scale 0.2s ease-in-out;
+  animation: scale 0.2s ease-in-out;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.01);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@media (min-width: 768px) {
+  .horizontal-tabs .tab__content .wp-block-columns {
+    align-items: stretch;
+  }
+  .horizontal-tabs .tab__content .wp-block-columns .wp-block-column,
+  .horizontal-tabs .tab__content .wp-block-columns .wp-block-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+  }
+  .horizontal-tabs .tab__content .wp-block-columns .wp-block-group .wp-block-heading {
+    margin-bottom: 0;
+  }
+  .horizontal-tabs .tab__content .wp-block-columns .wp-block-group .is-style-cta-link {
+    margin-top: auto;
+  }
+}
+
+.horizontal-tabs [id^=tab]:checked + label {
+  color: var(--wp--preset--color--palette-bg);
+  background-color: var(--wp--preset--color--palette-brand-1);
+  box-shadow: 0 0 8px var(--wp--preset--color--palette-brand-1);
+}
+.horizontal-tabs [id^=tab]:checked + label img {
+  filter: brightness(1000%);
+}
+
+@media (min-width: 768px) {
+  .horizontal-tabs label span {
+    display: block;
+  }
+}
+.horizontal-tabs .icon {
+  margin-top: 1rem;
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  border-radius: 100%;
+  border: 2px solid #CACFD6;
+  background-size: 100px 50px;
+  box-sizing: border-box;
+}
+
+.horizontal-tabs .tab1:checked ~ .tab__content--1, .horizontal-tabs .tab2:checked ~ .tab__content--2, .horizontal-tabs .tab3:checked ~ .tab__content--3, .horizontal-tabs .tab4:checked ~ .tab__content--4, .horizontal-tabs .tab5:checked ~ .tab__content--5, .horizontal-tabs .tab6:checked ~ .tab__content--6, .horizontal-tabs .tab7:checked ~ #tab__content--7, .horizontal-tabs .tab8:checked ~ .tab__content--8 {
+  display: block;
+}
+
+/*# sourceMappingURL=horizontal-tabs.css.map */

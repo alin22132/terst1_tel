@@ -1,0 +1,106 @@
+{% include 'pages/top.html' %}
+
+        <style>
+            /* start catalog-items */
+.catalog-items {
+	margin-top: 60px;
+}
+.catalog-items .grid-wrap{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 20px;
+}
+.catalog-item {
+	background: #fff;
+	box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+
+}
+.catalog-item a{
+
+}
+.catalog-item p{
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 26px;
+	text-align: center;
+	color: #494949;
+	transition: 200ms linear;
+	padding-bottom: 0px;
+    padding-top: 10px;
+}
+.catalog-item span{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 140px;
+}
+.catalog-item img{
+	width: auto;
+	height: auto;
+	max-width: 90%;
+	max-height: 90%;
+	object-fit: contain;
+	transition: 200ms linear;
+}
+.catalog-item:hover p{
+	color: rgb(236, 28, 44);
+}
+.catalog-item:hover img {
+	transform: scale(1.1);
+}
+/* end catalog-items */
+        </style>
+
+<style>
+    /* Define the style for the anchor tag */
+    a.category-link {
+        color: inherit; /* Set the initial color */
+        transition: color 0.3s ease; /* Smooth transition for color change */
+    }
+
+    /* Define the hover effect */
+    a.category-link:hover {
+        color: rgb(236, 28, 44); /* Change color on hover */
+    }
+</style>
+
+
+<div class="site-substance " id="site-substance" style="padding-bottom: 100px">
+    <div class="container">
+
+        <main class="site-main site-main--reading gutenberg-overflow">
+            <div class="post-28 page type-page status-publish hentry" id="post-28">
+
+    <section class="content">
+       <section class="catalog-items">
+	<div class="container">
+		<div class="container__head">
+            <h2 style="font-weight: 400;font-size: 18px"><a href="{% url 'index' %}" class="category-link">{{ category.name }}</a></h2>
+            <h1 style="font-family: 'Helvetica Neue Condensed', sans-serif; letter-spacing: .18rem; text-transform: uppercase; font-weight: 800; color: #202124">Brands</h1>
+        </div>
+        <div class="grid-wrap">
+            {% for brand in brands %}
+                <div class="catalog-item">
+					  <a href="{% url 'model_list' category_name=category.name brand_name=brand.name %}">
+						<p>{{ brand.name }}</p>
+					</a>
+				</div>
+            {% endfor %}
+
+					</div>
+	</div>
+</section>
+	</div>
+    </section>
+
+    <!--  -->
+
+</div>
+        </main>
+
+    </div>
+</div>
+
+{% include 'pages/footer.html' %}

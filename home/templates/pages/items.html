@@ -1,0 +1,227 @@
+{% include 'pages/top.html' %}
+{% load static %}
+        <style>
+            /* start catalog-items */
+.catalog-items {
+	margin-top: 60px;
+}
+.catalog-items .grid-wrap{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 20px;
+}
+.catalog-item {
+	background: #fff;
+	box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+
+}
+.catalog-item a{
+
+}
+.catalog-item p{
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 26px;
+	text-align: center;
+	color: #494949;
+	transition: 200ms linear;
+	padding-bottom: 0px;
+    padding-top: 10px;
+}
+.catalog-item span{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 140px;
+}
+.catalog-item img{
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 90%;
+	object-fit: contain;
+	transition: 200ms linear;
+}
+.catalog-item:hover p{
+	color: rgb(236, 28, 44);
+}
+.catalog-item:hover img {
+	transform: scale(1.1);
+}
+/* end catalog-items */
+        </style>
+
+<style>
+    /* Define the style for the anchor tag */
+    a.category-link {
+        color: inherit; /* Set the initial color */
+        transition: color 0.3s ease; /* Smooth transition for color change */
+        letter-spacing: 0.08rem;
+    }
+
+    /* Define the hover effect */
+    a.category-link:hover {
+        color: rgb(236, 28, 44); /* Change color on hover */
+    }
+    @font-face {
+    font-family: 'Helvetica Neue Condensed';
+    src: url('{% static "HelveticaNeue-CondObl.ttf" %}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+    .fonts{
+        font-family: 'Helvetica Neue Condensed', sans-serif;;
+    }
+    .product-list--vertical .product-list-item--suggestion {
+    height: auto!important;
+    margin-top: 10px;
+    width: calc(25% - 12px)
+}
+    .product-list-item--suggestion{
+         height: auto!important;
+    margin-top: 10px;
+    width: calc(25% - 12px)
+    }
+    @media (min-width: 1200px) {
+    .product-list--vertical .product-list-item--suggestion {
+        margin-left:16px
+    }
+
+    .product-list--vertical .product-list-item--suggestion:nth-child(4n+1) {
+        margin-left: 0
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .product-list--vertical .product-list-item--suggestion {
+        width:calc(50% - 10px)
+    }
+}
+
+@media (max-width: 575.98px) {
+    .product-list--vertical .product-list-item--suggestion {
+        width:100%
+    }
+}
+    .product-list--vertical .product-list-item--suggestion,
+.product-list-item--suggestion {
+    margin-left:0px;
+}
+@media (min-width: 1200px) {
+    .product-list--vertical .product-list-item--suggestion:nth-child(4n+1),
+    .product-list-item--suggestion:nth-child(4n+1) {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .product-list--vertical .product-list-item--suggestion,
+    .product-list-item--suggestion {
+        width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .product-list--vertical .product-list-item--suggestion,
+    .product-list-item--suggestion {
+        width: 100%;
+    }
+}
+
+    .mt-1 {
+    margin-top: 10px!important
+}
+    .d-flex {
+    display: flex!important
+}
+    .bb1:hover{
+        transform: none; !important;
+    }
+
+    .bb2{
+        background-color: #f2891e;
+        border: 1px solid #f2891e;
+    }
+
+    .bb2:hover{
+        transform: none; !important;
+        border-color: #777777;
+        background-color: #777777;
+    }
+
+
+</style>
+
+
+<div class="site-substance " id="site-substance" style="padding-bottom: 100px">
+    <div class="container">
+
+        <main class="site-main site-main--reading gutenberg-overflow">
+            <div class="post-28 page type-page status-publish hentry" id="post-28">
+
+    <section class="content">
+    <div class="container__head" style="font-family: 'Helvetica Neue Condensed', sans-serif;">
+        <h2 style="font-weight: 400;font-size: 18px"><a href="{% url 'index' %}" class="category-link">{{ category.name }}  /  </a><a href="{% url 'category_detail' category_name=category.name %}" class="category-link">{{ brand.name }}  /  <a href="{% url 'model_list' category_name=category.name brand_name=brand.name %}" class="category-link">{{ model.name }}</a>  </h2>
+        <h1 style="font-family: 'Helvetica Neue Condensed', sans-serif; letter-spacing: .18rem; text-transform: uppercase; font-weight: 800; color: #202124">Items</h1>
+        </div>
+       <section class="catalog-items">
+	<div class="container">
+    {% for item in item_list %}
+         <div class="product-list-item--suggestion rounded-bordered h-100 d-flex flex-column">
+            <a href="/bosch/1-987-429-404-17634" class="text-center">
+                <img src="{{ item.image|safe }}" alt="{{ item.name }}" width="115" height="115" class="img-fluid" loading="lazy">
+            </a>
+                            <a href="/bosch/1-987-429-404-17634" class="fw-bold mt-2 text-black">
+                        {{ item.name }}
+                    </a>
+                        <div class="fs-xsmall mt-1">{{ item.art_nr }}</div>
+                    <div class="mt-auto pt-1">
+
+
+<div class="product-price fw-medium">
+                     <span class="price__amount">
+         {{ item.price }}&nbsp;€
+    </span>
+
+            </div>
+
+
+        </div>
+         <div class="d-flex mt-1">
+                   {% if item.avlbl %}
+    <a href="#" class="btn btn-primary w-100 bb1">
+        Available
+    </a>
+{% else %}
+    <a href="#" class="btn btn-primary w-100 bb2">
+        Not available
+    </a>
+{% endif %}
+
+
+
+
+
+
+                    </div>
+
+	</div>
+        {% endfor %}
+    </div>
+       </section>
+
+</section>
+	</div>
+    </section>
+
+    <!--  -->
+
+</div>
+        </main>
+
+    </div>
+</div>
+
+{% include 'pages/footer.html' %}

@@ -1,0 +1,164 @@
+/**
+ * Where are all the colors?
+ *
+ * Everything has been moved to the bedstone/functions/palette.php file.
+ *
+ * In SASS, you can use the color names as css variables. There's even a
+ *     lighter/darker version of each color. Here are some examples:
+ *     color: var(--palette-text);
+ *     background-color: var(--palette-bg-alt);
+ *     border-color: var(--palette-bg-alt);
+ */
+.flexset {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: -1vw;
+  margin-right: -1vw;
+  overflow: hidden;
+}
+.flexset > * {
+  padding-left: calc(2vw / 2);
+  padding-right: calc(2vw / 2);
+}
+.flexset--nogutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+.flexset--nogutter > * {
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 781px) {
+  .flexset {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -1.5vw;
+    margin-right: -1.5vw;
+    overflow: hidden;
+  }
+  .flexset > * {
+    padding-left: calc(3vw / 2);
+    padding-right: calc(3vw / 2);
+  }
+  .flexset--nogutter {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flexset--nogutter > * {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (min-width: 991px) {
+  .flexset {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -1em;
+    margin-right: -1em;
+    overflow: hidden;
+  }
+  .flexset > * {
+    padding-left: calc(2em / 2);
+    padding-right: calc(2em / 2);
+  }
+  .flexset--nogutter {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flexset--nogutter > * {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (min-width: 1199px) {
+  .flexset {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -1em;
+    margin-right: -1em;
+    overflow: hidden;
+  }
+  .flexset > * {
+    padding-left: calc(2em / 2);
+    padding-right: calc(2em / 2);
+  }
+  .flexset--nogutter {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flexset--nogutter > * {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.leadership-cards {
+  padding: 0 1rem;
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 3%;
+}
+@media (min-width: 991px) {
+  .leadership-cards {
+    padding: 0;
+    gap: 2%;
+  }
+}
+
+.leadership-cards:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.leadership-card {
+  display: block;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  background-color: var(--wp--preset--color--palette-bg);
+  border-radius: 0.75em;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.15) 0px 2px 20px 2px;
+}
+@media (min-width: 480px) {
+  .leadership-card {
+    max-width: 48.5%;
+  }
+}
+@media (min-width: 781px) {
+  .leadership-card {
+    max-width: 31.33%;
+  }
+}
+@media (min-width: 991px) {
+  .leadership-card {
+    max-width: 23.5%;
+  }
+}
+.leadership-card .leadership-card-img {
+  aspect-ratio: 1/1;
+}
+.leadership-card .leadership-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  filter: grayscale(100%);
+  transition: all 0.2s ease;
+}
+.leadership-card:hover, .leadership-card:active {
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+.leadership-card:hover .leadership-card-img img, .leadership-card:active .leadership-card-img img {
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
+}
+.leadership-card .leadership-card-name,
+.leadership-card .leadership-card-title {
+  margin: 0;
+  font-style: italic;
+}
+
+/*# sourceMappingURL=leadership-cards.css.map */

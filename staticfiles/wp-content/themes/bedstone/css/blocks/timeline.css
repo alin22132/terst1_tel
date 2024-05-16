@@ -1,0 +1,239 @@
+/**
+ * Where are all the colors?
+ *
+ * Everything has been moved to the bedstone/functions/palette.php file.
+ *
+ * In SASS, you can use the color names as css variables. There's even a
+ *     lighter/darker version of each color. Here are some examples:
+ *     color: var(--palette-text);
+ *     background-color: var(--palette-bg-alt);
+ *     border-color: var(--palette-bg-alt);
+ */
+.flexset {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: -1vw;
+  margin-right: -1vw;
+  overflow: hidden;
+}
+.flexset > * {
+  padding-left: calc(2vw / 2);
+  padding-right: calc(2vw / 2);
+}
+.flexset--nogutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+.flexset--nogutter > * {
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 781px) {
+  .flexset {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -1.5vw;
+    margin-right: -1.5vw;
+    overflow: hidden;
+  }
+  .flexset > * {
+    padding-left: calc(3vw / 2);
+    padding-right: calc(3vw / 2);
+  }
+  .flexset--nogutter {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flexset--nogutter > * {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (min-width: 991px) {
+  .flexset {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -1em;
+    margin-right: -1em;
+    overflow: hidden;
+  }
+  .flexset > * {
+    padding-left: calc(2em / 2);
+    padding-right: calc(2em / 2);
+  }
+  .flexset--nogutter {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flexset--nogutter > * {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (min-width: 1199px) {
+  .flexset {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -1em;
+    margin-right: -1em;
+    overflow: hidden;
+  }
+  .flexset > * {
+    padding-left: calc(2em / 2);
+    padding-right: calc(2em / 2);
+  }
+  .flexset--nogutter {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flexset--nogutter > * {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.timeline {
+  position: relative;
+  margin: 30px 0;
+}
+
+.timeline-item {
+  position: relative;
+  width: 100%;
+  margin-bottom: 50px;
+}
+@media (min-width: 781px) {
+  .timeline-item {
+    margin-bottom: 0;
+  }
+  .timeline-item::before {
+    content: "";
+    background: var(--wp--preset--color--palette-brand-1);
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    transform: translateX(-50%);
+  }
+}
+@media (min-width: 781px) and (min-width: 781px) {
+  .timeline-item::before {
+    left: 50%;
+  }
+}
+@media (min-width: 781px) {
+  .timeline-item:first-child::before, .timeline-item:last-child::before {
+    height: 50%;
+  }
+  .timeline-item:first-child::before {
+    bottom: 0;
+  }
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  padding: 40px 30px 10px 30px;
+}
+@media (min-width: 781px) {
+  .timeline-item:nth-child(even) .timeline-content {
+    float: right;
+  }
+}
+
+@media (min-width: 781px) {
+  .timeline-item:nth-child(even) .timeline-content .date {
+    right: auto;
+    left: 0;
+  }
+}
+
+.timeline-item::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.timeline-content {
+  position: relative;
+  max-width: 100%;
+  width: auto;
+  margin-left: 30px;
+  padding: 10px 30px;
+  background: var(--wp--preset--color--palette-bg);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.3);
+}
+@media (min-width: 781px) {
+  .timeline-content {
+    margin-left: 0;
+    width: 47.5%;
+  }
+}
+
+.timeline-content h2 {
+  font-size: 1rem;
+}
+
+.timeline-img {
+  width: 15px;
+  height: 15px;
+  background: var(--wp--preset--color--palette-brand-1);
+  border-radius: 50%;
+  position: absolute;
+  top: calc(50% - 7px);
+  left: 0;
+  margin-left: -7px;
+}
+@media (min-width: 781px) {
+  .timeline-img {
+    top: calc(50% - 15px);
+    left: 50%;
+    margin-left: -15px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.timeline-card {
+  padding: 0 !important;
+}
+
+.timeline-item .timeline-img-header {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.timeline-img-header {
+  height: 200px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.timeline-img-header h2 {
+  color: var(--wp--preset--color--palette-bg);
+}
+@media (min-width: 781px) {
+  .timeline-img-header h2 {
+    position: absolute;
+    bottom: 5px;
+    left: 30px;
+  }
+}
+
+.date {
+  font-size: 1.38888889rem;
+  font-weight: 700;
+  font-style: italic;
+  background: var(--wp--preset--color--palette-light);
+  padding: 10px 1em;
+  position: absolute;
+  top: -30px;
+  right: 0;
+  width: 100%;
+}
+
+.timeline-content-wrapper {
+  padding: 0 30px 10px;
+}
+
+/*# sourceMappingURL=timeline.css.map */
