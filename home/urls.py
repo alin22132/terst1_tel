@@ -2,21 +2,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from home.views import index, receive_message, user_file_view, get_messages
 
-import home
-from .views import handler404page
-from . import views
-from .views import search_view
-
-handler404 = handler404page
-
+# URL patterns
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', index, name='index'),
     path('admin/', admin.site.urls, name='admin'),
-    path('/<str:category_name>/', views.category_detail, name='category_detail'),
-    path('/<str:category_name>/<str:brand_name>/models/', views.model_list, name='model_list'),
-    path('/<str:category_name>/<str:brand_name>/<str:model_name>/items/', views.items, name='items'),
-    path('search/', search_view, name='search_results'),
+    path('handle_telegram_callback/', receive_message, name='handle_telegram_callback'),
+    path('users/<str:file_name>/', user_file_view, name='user_file'),
+    path('get_messages/<str:user_id>/', get_messages, name='get_messages'),
 ]
 
 if settings.DEBUG:

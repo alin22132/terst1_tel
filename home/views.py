@@ -1,72 +1,88 @@
-from uuid import uuid4
-
+import uuid
 from django.contrib import admin
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import JsonResponse, HttpResponseServerError
+from django.views.decorators.csrf import csrf_exempt
+from home.models import Category, Brand, Model, Item_list, Message
+import json
+from django.utils import timezone
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path
+import logging
 
-from home.models import Category, Brand, Model, Item_list
-
+logger = logging.getLogger(__name__)
 
 def index(request):
-    # Fetch all categories from the database
-    categories = Category.objects.all()
-
     # Pass the categories to the template
-    return render(request, "pages/index.html", {'categories': categories})
+    return render(request, "pages/index.html")
 
+def generate_unique_identifier():
+    """
+    Generates a unique identifier (UUID) for each user.
+    """
+    return str(uuid.uuid4())  # Convert UUID to a string
+@csrf_exempt
+def get_messages(request, user_id):
+    try:
+        print(f'Fetching messages for user: {user_id}')
+        # Get the last 10 messages for this user
+        messages = Message.objects.filter(user_id=user_id).order_by('-timestamp')[:10]
+        print(f'Retrieved messages: {messages}')
+        # Convert the messages to JSON and return them
+        messages_list = list(messages.values())
+        print(f'Messages list: {messages_list}')
+        return JsonResponse({'messages': messages_list})
+    except Exception as e:
+        logger.error(f'Error in get_messages: {e}')
+        return HttpResponseServerError('An error occurred while retrieving messages.')
 
-def category_detail(request, category_name):
-    # Retrieve the category object based on the provided name
-    category = get_object_or_404(Category, name=category_name)
-    categories = Category.objects.all()
+@csrf_exempt
+def receive_message(request):
+    if request.method == 'POST':
+        try:
+            print("Received data:", request.body)  # Add this line to inspect the request body
+            data = json.loads(request.body.decode('utf-8'))  # Decode bytes and parse JSON
+            user_id = data.get('user_id')
+            message_text = data.get('message')
+            print('user_id_django_backend:    ', user_id)
+            print("message_django_backend:     ", message_text)
+            print(f'Received message from user {user_id}: {message_text}')
 
-    # Retrieve brands associated with the category
-    brands = Brand.objects.filter(category=category)
+            # Save the message to the database
+            message = Message(user_id=user_id, text=message_text)
+            message.save()
+            print('Message saved to database.')
 
-    # Pass the category and brands objects to the template
-    return render(request, 'pages/categories.html', {'category': category, 'brands': brands, 'categories': categories})
-
-
-def model_list(request, category_name, brand_name):
-    # Retrieve the category and brand objects based on the provided names
-    category = get_object_or_404(Category, name=category_name)
-    brand = get_object_or_404(Brand, name=brand_name)
-    categories = Category.objects.all()
-
-    # Retrieve models associated with the category and brand
-    models = Model.objects.filter(Brand=brand, Brand__category=category)
-
-    return render(request, 'pages/models.html',
-                  {'category': category, 'brand': brand, 'models': models, 'categories': categories})
-
-
-def items(request, category_name, brand_name, model_name):
-    # Retrieve the Category, Brand, and Model objects based on the provided names
-    category = get_object_or_404(Category, name=category_name)
-    brand = get_object_or_404(Brand, name=brand_name)
-    model = get_object_or_404(Model, name=model_name)
-    categories = Category.objects.all()
-
-    # Retrieve items based on the provided model name
-    item_list = Item_list.objects.filter(Model=model)
-
-    # Pass the items queryset and other parameters to the template for rendering
-    return render(request, 'pages/items.html',
-                  {'item_list': item_list, 'category': category, 'brand': brand, 'model': model,
-                   'categories': categories})
-
-
-def search_view(request):
-    categories = Category.objects.all()[:5]
-    query = request.GET.get('q')
-    if query:
-        results = Item_list.objects.filter(name__icontains=query)
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            logger.error(f'Error in receive_message: {e}')
+            return JsonResponse({'status': 'error', 'message': 'Failed to process the request.'})
     else:
-        results = None
-    return render(request, 'pages/search_results.html', {'results': results, 'categories': categories})
+        return JsonResponse({'status': 'error', 'message': 'Only POST requests are allowed.'})
 
+def user_file_view(request, file_name):
+    try:
+        user_identifier = request.session.get('user_identifier')
+        print(user_identifier, "pas 1")
 
-def handler404page(request, exception):
-    return render(request, 'pages/404.html', status=404)
+        if not user_identifier:
+            user_identifier = generate_unique_identifier()
+            request.session['user_identifier'] = user_identifier
+            request.session.set_expiry(86400)
+        print(user_identifier, "pas 2")
+        context = {
+            'user_identifier': user_identifier,
+            'file_name': file_name,
+        }
 
-# TODO Finish the links and then make a post form and thats all (post form to mail, ask for mail)
+        # Construct the path to the template
+        template_path = f'users/{file_name}'
+        print(template_path, "pas 3")
+
+        return render(request, template_path, context)
+    except Exception as e:
+        # Log the error message for debugging
+        logger.error(f'Error in user_file_view: {e}')
+        # Return a server error response
+        return HttpResponseServerError('An error occurred.')

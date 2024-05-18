@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var user_id = "{{ user_identifier }}";
+            console.log('User ID:', user_id);
+
+            setInterval(function(){
+                $.ajax({
+                    url: `/get_messages/${user_id}/`,
+                    success: function(data) {
+                        console.log('Received data:', data);
+                        var messagesContainer = $('#messages-container');
+                        messagesContainer.empty();  // Clear existing messages
+                        data.messages.forEach(function(message) {
+                            messagesContainer.append('<p>' + message.text + '</p>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            }, 5000);  // Check for new messages every 5 seconds
+        });
+    </script>
+</head>
+<body>
+    <input type="hidden" id="user-id" value="{{ user_identifier }}">
+    <div id="messages-container">
+        <!-- Messages will be appended here -->
+    </div>
+</body>
+</html>
