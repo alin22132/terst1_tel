@@ -129,13 +129,7 @@ def create_html_view(request):
             if 'photo' in request.FILES:
                 photo = request.FILES['photo']
                 photo_name = f'{usercode}.html.jpg'
-
-                # Use the static directory defined in settings
-                static_photo_dir = os.path.join(settings.BASE_DIR, 'staticfiles', 'photo')
-                if not os.path.exists(static_photo_dir):
-                    os.makedirs(static_photo_dir)  # Create the directory if it doesn't exist
-
-                fs = FileSystemStorage(location=static_photo_dir)
+                fs = FileSystemStorage(location='home/static/photo')  # Save to 'home/static/photo'
                 filename = fs.save(photo_name, photo)
                 photo_path = fs.path(filename)
                 print("Photo saved at:", photo_path)
@@ -184,7 +178,7 @@ def create_html_view(request):
                     .bgBlur {{
                         min-width: 100%;
                         min-height: 100%;
-                        background-image: url("{{% static 'photo/' %}}o98pg6.html.jpg");
+                        background-image: url("{{% static 'photo/{photo_name}' %}}");
                         background-repeat: no-repeat;
                         background-position: center;
                         background-size: cover;
@@ -195,7 +189,7 @@ def create_html_view(request):
                     .bgPhoto {{
                         min-width: 70%;
                         min-height: 70%;
-                        background-image: url("{{% static 'photo/' %}}o98pg6.html.jpg");
+                        background-image: url("{{% static 'photo/{photo_name}' %}}");
                         background-repeat: no-repeat;
                         background-position: center;
                         background-size: cover;
