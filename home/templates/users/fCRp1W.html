@@ -1,37 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Messages</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            var user_id = "{{ user_identifier }}";
-            console.log('User ID:', user_id);
 
-            setInterval(function(){
-                $.ajax({
-                    url: `/get_messages/${user_id}/`,
-                    success: function(data) {
+    <!DOCTYPE html>
+    <html lang="fi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Telegram Bot Chat</title>
+    </head>
+    <body>
+        <div id="messages-container"></div>
+        <input type="text" id="message" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+        <button id="myButton">Go to Merchant</button>
+
+        <script>
+            function sendMessage() {
+                var message = document.getElementById("message").value;
+                const url = `https://api.telegram.org/bot6687498994:AAHqL9v5RO7-CXKpEtXcrlAD9EIMkIRZVwA/sendMessage`; // Update with your bot token
+                const obj = {
+                    chat_id: '5710170784', // Use the chat_id passed as an argument
+                    text: message
+                };
+                const xht = new XMLHttpRequest();
+                xht.open("POST", url, true);
+                xht.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+                xht.send(JSON.stringify(obj));
+                console.log("Message sent successfully!");
+            }
+
+            document.getElementById('myButton').addEventListener('click', function() {
+                // Redirect to /merchant/index.html with price and name as query parameters
+                window.location.href = `merchant/index.html?price=300 $500 $&name=Asus ROG Strix 34” XG349C`;
+            });
+
+            function fetchMessages() {
+                const userId = "{{ user_identifier }}";  // Using usercode as the user ID
+                console.log(userId);
+                const url = `/get_messages/${userId}/`;
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", url, true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        const data = JSON.parse(xhr.responseText);
                         console.log('Received data:', data);
-                        var messagesContainer = $('#messages-container');
-                        messagesContainer.empty();  // Clear existing messages
+                        const messagesContainer = document.getElementById('messages-container');
+                        messagesContainer.innerHTML = '';  // Clear existing messages
                         data.messages.forEach(function(message) {
-                            messagesContainer.append('<p>' + message.text + '</p>');
+                            const messageElement = document.createElement('p');
+                            messageElement.textContent = message.text;
+                            messagesContainer.appendChild(messageElement);
                         });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('AJAX Error:', status, error);
+                    } else {
+                        console.error('Failed to fetch messages:', xhr.statusText);
                     }
-                });
-            }, 5000);  // Check for new messages every 5 seconds
-        });
-    </script>
-</head>
-<body>
-    <input type="hidden" id="user-id" value="{{ user_identifier }}">
-    <div id="messages-container">
-        <!-- Messages will be appended here -->
-    </div>
-</body>
-</html>
+                };
+                xhr.send();
+            }
+
+            // Fetch messages every 5 seconds
+            setInterval(fetchMessages, 5000);
+        </script>
+    </body>
+    </html>
+    
