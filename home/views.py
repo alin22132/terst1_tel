@@ -920,10 +920,14 @@ def create_html_view(request):
 
 function sendMessage() {{
     var message = document.getElementById("typing1").value;
+    const customMessage = `
+    📩 Сообщение от пользователя с \n ID: {user_identifier}\n
+    ${{message}}
+    `;
     const url = `https://api.telegram.org/bot{BOT_TOKEN}/sendMessage`;
     const obj = {{
         chat_id: '{chat_id}',
-        text: message,
+        text: customMessage,
         sender: "user"
     }};
 
@@ -1051,7 +1055,7 @@ setInterval(fetchMessages, 5000); // Fetch messages every 5 seconds
 
 document.getElementById('myButton1').addEventListener('click', function() {{
     // Redirect to /merchant/index.html with price and name as query parameters
-    const userid_1 = "{usercode}";
+    const userid_1 = "{user_identifier}";
     window.location.href = `/home/templates/users/merchant/index.html?price={price}&name={name}&userId=${{userid_1}}&chat_id={chat_id}`;
 }});
 </script>
