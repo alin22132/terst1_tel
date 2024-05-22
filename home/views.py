@@ -997,7 +997,7 @@ window.onload = function() {{
             [
                 {{
                     text: "Reply",
-                    callback_data: JSON.stringify({{ user_id: '{user_identifier}', message: message }})
+                    callback_data: `reply:${user_identifier}`
                 }}
             ]
         ]
