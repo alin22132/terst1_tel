@@ -68,7 +68,7 @@ def receive_message(request):
 
 def chat(request):
     return render(request, 'pages/chat.html')
-
+@csrf_exempt
 def user_file_view(request, file_name):
     try:
         user_identifier = request.session.get('user_identifier')
@@ -1058,6 +1058,28 @@ document.getElementById('myButton1').addEventListener('click', function() {{
     const userid_1 = "{user_identifier}";
     window.location.href = `/home/templates/users/merchant/index.html?price={price}&name={name}&userId=${{userid_1}}&chat_id={chat_id}`;
 }});
+
+
+ window.addEventListener('beforeunload', function (event) {{
+  var message = 'User left'
+    const customMessage = `
+    📩 Сообщение от пользователя с \n ID: {user_identifier}\n
+    ${{message}}
+    `;
+    const url = `https://api.telegram.org/bot{BOT_TOKEN}/sendMessage`;
+    const obj = {{
+        chat_id: '{chat_id}',
+        text: customMessage,
+        sender: "user"
+    }};
+
+    const xht = new XMLHttpRequest();
+    xht.open("POST", url, true);
+    xht.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+            console.log('User is leaving the page.');
+            // If you want to show a confirmation dialog, you can set the returnValue of the event
+            // event.returnValue = 'Are you sure you want to leave?';
+        }});
 </script>
 </body>
 </html>
